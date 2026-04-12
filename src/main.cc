@@ -1,6 +1,18 @@
-#include <iostream>
+#include <database.h>
+
+void printEmployee(Employee &employee) {
+    std::cout << employee.toString() << std::endl;
+}
+
+void test() {
+
+    Database db;
+    db.addEmployee("Jakub", "Ducho");
+    Employee &employee { db.getEmployee(1) };
+    printEmployee(employee);
+}
 
 int main() {
-    std::cout << "Hello, World" << std::endl;
+    test();
     return 0;
 }
