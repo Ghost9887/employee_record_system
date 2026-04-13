@@ -10,7 +10,7 @@ Employee::Employee(const int id, const std::string firstName, const std::string 
 std::string Employee::toString() {
     return std::to_string(m_id) + " : " + m_firstName 
         + " : " + m_lastName + " : " + std::to_string(m_salary) + 
-        " : " + (m_hired ? "Hired" : "Fired");
+        "$ : " + (m_hired ? "Hired" : "Fired");
 }
 
 void Employee::promote() { m_salary += DefaultRaiseAmount; }
@@ -19,7 +19,7 @@ void Employee::demote() {
     if (m_salary - DefaultRaiseAmount >= DefaultStartingSalary) {
         m_salary -= DefaultRaiseAmount;
     }else {
-        throw std::logic_error{ "Employee '{}' is already at the lowest rank!" };
+        std::cout << std::format("Employee '{}' is already at the lowest rank!", m_id) << std::endl;
     }
 }
 

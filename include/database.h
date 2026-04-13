@@ -19,14 +19,20 @@ public:
     std::optional<EmployeeRef> getCurrentEmployee();
     std::optional<EmployeeRef> nextEmployee();
     std::optional<EmployeeRef> previousEmployee();
+    std::optional<EmployeeRef> getSelectedEmployee();
+    void selectEmployee(std::optional<EmployeeRef> employee);
     int getCurrentEmployeeNumber();
     void displayAll();
     void displayEmployee(const std::optional<EmployeeRef> employee);
+    bool isSelected();
+    void unselect();
 private:
     void error(const std::string message);
 private:
     std::vector<Employee> m_employees;
     int currentEmployeeNumber { -1 };
+    int selectedEmployeeId { -1 };
+    bool selected { false };
 };
 
 #endif 

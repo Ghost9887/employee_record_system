@@ -33,6 +33,8 @@ std::optional<EmployeeRef> Database::getCurrentEmployee() {
     if (!m_employees.empty()) { 
         return m_employees.at(currentEmployeeNumber);
     }
+
+    error("No employee found");
     return std::nullopt;
 }
 
@@ -54,8 +56,32 @@ std::optional<EmployeeRef> Database::previousEmployee() {
     return std::nullopt;
 }
 
+std::optional<EmployeeRef> Database::getSelectedEmployee() {
+    std::optional<EmployeeRef> employee { getEmployee(selectedEmployeeId) };
+    if (employee.has_value()) return employee;
+
+    error("Failed to select employee");
+    return std::nullopt;
+}
+
+void Database::selectEmployee(std::optional<EmployeeRef> employee) {
+    if (employee.has_value()) {
+        selectedEmployeeId = employee.value().get().getEmployeeNumber();
+        selected = true;
+    }
+}
+
 int Database::getCurrentEmployeeNumber() {
     return currentEmployeeNumber;
+}
+
+void Database::unselect() {
+    selectedEmployeeId = -1;
+    selected = false;
+}
+
+bool Database::isSelected() {
+    return selected;
 }
 
 void Database::displayAll() {
@@ -71,11 +97,10 @@ void Database::displayAll() {
 void Database::displayEmployee(const std::optional<EmployeeRef> employee) {
     if (employee.has_value()) {
         std::cout << "{ " << employee.value().get().toString() << " }" << '\n';
-    }else {
-        error("No employee found");
     }
 }
 
 void Database::error(const std::string message) {
     std::cout << "Error: " << message << std::endl;
 }
+
