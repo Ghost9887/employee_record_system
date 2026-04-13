@@ -3,9 +3,10 @@
 
 #include <vector>
 #include <string>
+#include <optional>
 #include <employee.h>
 
-static inline int CurrentEmployeeNumber = { 1 };
+using EmployeeRef = std::reference_wrapper<Employee>;
 
 class Database {
 public:
@@ -13,11 +14,19 @@ public:
     ~Database() = default;
 public:
     void addEmployee(const std::string firstName, const std::string lastName);
-    Employee& getEmployee(const int id);
-    Employee& getEmployee(const std::string firstName, const std::string lastName);
+    std::optional<EmployeeRef> getEmployee(const int id);
+    std::optional<EmployeeRef> getEmployee(const std::string firstName, const std::string lastName);
+    std::optional<EmployeeRef> getCurrentEmployee();
+    std::optional<EmployeeRef> nextEmployee();
+    std::optional<EmployeeRef> previousEmployee();
+    int getCurrentEmployeeNumber();
     void displayAll();
+    void displayEmployee(const std::optional<EmployeeRef> employee);
+private:
+    void error(const std::string message);
 private:
     std::vector<Employee> m_employees;
+    int currentEmployeeNumber { -1 };
 };
 
 #endif 
