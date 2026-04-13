@@ -8,6 +8,8 @@
 
 using EmployeeRef = std::reference_wrapper<Employee>;
 
+inline static int NextEmployeeNumber { 0 };
+
 class Database {
 public:
     Database() = default;

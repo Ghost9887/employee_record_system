@@ -7,7 +7,8 @@ void Database::addEmployee(const std::string firstName, const std::string lastNa
         return;
     }
 
-    m_employees.emplace_back(Employee(++currentEmployeeNumber, firstName, lastName));
+    m_employees.emplace_back(Employee(NextEmployeeNumber++, firstName, lastName));
+    currentEmployeeNumber = NextEmployeeNumber - 1;
 }
 
 std::optional<EmployeeRef> Database::getEmployee(const int id) {
