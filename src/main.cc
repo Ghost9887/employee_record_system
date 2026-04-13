@@ -13,6 +13,7 @@ void printMainHelp() {
     std::cout << std::endl;
     std::cout << "---------------------MAIN HELP--------------------------" << std::endl;
     std::cout << "Quit -> 'q' || 'quit'" << std::endl;
+    std::cout << "Clear -> 'clear'" << std::endl;
     std::cout << "Display all employees -> 'all'" << std::endl;
     std::cout << "Display current employee -> 'current'" << std::endl;
     std::cout << "Previous employee -> 'p'" << std::endl;
@@ -27,6 +28,7 @@ void printSelectedHelp() {
     std::cout << std::endl;
     std::cout << "------------------SELECTED HELP-----------------------" << std::endl;
     std::cout << "Go back -> 'q' || 'quit'" << std::endl;
+    std::cout << "Clear -> 'clear'" << std::endl;
     std::cout << "Hire -> 'hire'" << std::endl;
     std::cout << "Fire -> 'fire'" << std::endl;
     std::cout << "Promote -> 'promote'" << std::endl;
@@ -74,6 +76,7 @@ void run (Database &db) {
         }else {
             if (cmd == "q" || cmd == "quit") db.unselect();
             else if (cmd == "help") printSelectedHelp();
+            else if (cmd == "clear") std::cout << "\033[2J\033[1;1H";
             else if (cmd == "display") db.displayEmployee(db.getSelectedEmployee());
             else if (cmd == "hire") db.getSelectedEmployee().value().get().hire();
             else if (cmd == "fire") db.getSelectedEmployee().value().get().fire();
